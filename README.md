@@ -2,7 +2,6 @@
 
 ![Artifacts](./Module/banner.png)
 [![最新发布](https://img.shields.io/github/v/release/Piktowo/yurikey?label=Release\&logo=github)](https://github.com/Piktowo/yurikey/releases/latest)
-[![CI](https://github.com/Piktowo/yurikey/actions/workflows/build.yml/badge.svg)](https://github.com/Piktowo/yurikey/actions/workflows/build.yml)
 
 一个无需系统修改的模块，轻松获得强完整性
 
