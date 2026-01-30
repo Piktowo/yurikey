@@ -19,6 +19,7 @@ log_message "Start"
 log_message "Writing"
 
 if ! command -v curl >/dev/null 2>&1 \
+   && ! command -v wget >/dev/null 2>&1 \
    && ! command -v $BUSYBOX_WGET >/dev/null 2>&1
 then
   log_message "- Cannot work without missing command."
@@ -28,7 +29,9 @@ then
 fi
 
 # Check if Tricky Store module is installed ( required dependency )
-if [ ! -d "$DEPENDENCY_MODULE_UPDATE" ] && [ ! -d "$DEPENDENCY_MODULE" ]; then
+if [ -d "$DEPENDENCY_MODULE_UPDATE" ] || [ -d "$DEPENDENCY_MODULE" ]; then
+  log_message "- Tricky Store installed"
+else
   log_message "- Error: Tricky Store module file not found!"
   log_message "- Please install Tricky Store before using Yuri Keybox."
   return 0
@@ -40,6 +43,12 @@ fi
 fetch_remote_keybox() {
   if command -v curl >/dev/null 2>&1; then
     curl -fsSL "$REMOTE_URL" | base64 -d > "$TARGET_FILE"
+    if [ ! -f "$TARGET_FILE" ]; then
+      log_message "ERROR: Remote script failed or no vaild keybox found. Aborting."
+      return 1
+    fi
+  elif command -v wget >/dev/null 2>&1; then
+    wget -qO- "$REMOTE_URL" | base64 -d > "$TARGET_FILE"
     if [ ! -f "$TARGET_FILE" ]; then
       log_message "ERROR: Remote script failed or no vaild keybox found. Aborting."
       return 1
