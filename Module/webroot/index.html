@@ -133,33 +133,39 @@
         <div class="content">
           <h1 class="main-title" data-i18n="advance_menu_title">Advanced Menu</h1>
           <div class="info-box info-content" style="margin-top: 3.5rem;">
-            <h3 class="sec-title" data-i18n="nav_advancemenu">Menu +</h3>
+            <h3 class="sec-title" data-i18n="nav_advance_menu">Menu +</h3>
             <div class="action-buttons">
               <!-- 6. Clear all detection traces-->
               <button id="btn-clear-all-detection traces" class="menu-btn split-items" data-script="clear_all_detection_traves.sh">
                 <img src="/common/assets/icon/play.svg" alt="Run" />
-                <span data-i18n="advance_clear_all_detection tracea">Clear all detection traces</span>
+                <span data-i18n="advance_clear_all_detection_traces">Clear all detection traces</span>
               </button>
 
-              <!-- 7. Fix LSPosed Detection (2) -->
+              <!-- 7. Set HMA-oss configs -->
+              <button id="btn-set-hma-oss-configs" class="menu-btn split-items" data-script="hma.sh">
+                <img src="/common/assets/icon/play.svg" alt="Run" />
+                <span data-i18n="advance_set_hma-oss_configs">Set HMA-oss configs</span>
+              </button>
+              
+              <!-- 8. Fix LSPosed Detection (2) -->
               <button id="btn-fix-detect-lsposed" class="menu-btn split-items" data-script="lsposed2.sh">
                 <img src="/common/assets/icon/play.svg" alt="Run" />
                 <span data-i18n="advance_fix_detect_lsposed">Fix LSPosed Detection (2)</span>
               </button>
 
-              <!-- 8. Fix PIF Detection (2) -->
+              <!-- 9. Fix PIF Detection (2) -->
               <button id="btn-fix-detect-pif" class="menu-btn split-items" data-script="pif2.sh">
                 <img src="/common/assets/icon/play.svg" alt="Run" />
                 <span data-i18n="advance_fix_detect_pif">Fix PIF Detection (2)</span>
               </button>
 
-              <!-- 9. Fix Recovery File Detection -->
+              <!-- 10. Fix Recovery File Detection -->
               <button id="btn-fix-detect-recovery-file" class="menu-btn split-items" data-script="twrp.sh">
                 <img src="/common/assets/icon/play.svg" alt="Run" />
                 <span data-i18n="advance_fix_detect_recovery_file">Fix Recovery File Detection</span>
               </button>
 
-              <!-- 10. Kill All Process -->
+              <!-- 11. Kill All Process -->
               <button id="btn-kill-all" class="menu-btn split-items" data-script="kill_all.sh">
                 <img src="/common/assets/icon/play.svg" alt="Run" />
                 <span data-i18n="advance_kill_all">Kill All Process</span>
