@@ -1,7 +1,7 @@
 {
-  "nav_home": "Home",
+  "nav_home": "Início",
   "nav_menu": "Menu",
-  "nav_update": "Update",
+  "nav_update": "Atualizar",
   "nav_advancemenu": "Menu +",
   "nav_settings": "Config",
 
@@ -19,7 +19,7 @@
   "menu_force_clear": "Fechar & Limpar os Dados da PlayStore",
   "menu_keybox": "Configurar Yuri Keybox",
   "menu_target": "Configurar Target.txt",
-  "menu_necessary": "Configura l'aplicació necessària",
+  "menu_necessary": "Configuração necessária",
   "menu_patch": "Configurar o Patch de Segurança",
 
   "advance_menu_title": "Menu Avançado",
@@ -44,11 +44,11 @@
   "role_WebUI Developer": "WebUI Desenvolver",
   "role_Ex Module Developer": "Ex-desenvolvedor de módulos",
 
-  "executing": "Executing \"{script}\"...",
-  "success": "Script \"{script}\" executed successfully.",
-  "failed": "Failed to execute script \"{script}\".",
-  "timeout": "Script \"{script}\" timed out.",
-  "ksu_not_available": "KernelSU exec API not available.",
+  "executing": "Executando \"{script}\"...",
+  "success": "Script \"{script}\" executado com sucesso.",
+  "failed": "Falha ao executar script \"{script}\".",
+  "timeout": "Script \"{script}\" expirou o tempo.",
+  "ksu_not_available": "KernelSU API não disponível.",
 
   "status_online": "Status: Online",
   "status_offline": "Status: Offline",
@@ -56,4 +56,5 @@
   "home_no_internet": "Sem conexão com a internet.",
   "home_connected": "Conectado",
   "home_disconnected": "Desconectado"
+
 }
