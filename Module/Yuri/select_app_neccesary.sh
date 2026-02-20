@@ -23,7 +23,6 @@ io.github.vvb2060.mahoshojo!
 com.google.android.contactkeys!
 com.google.android.ims!
 com.google.android.safetycore!
-com.google.android.apps.walletnfcrel!
 com.google.android.apps.nbu.paisa.user!
 com.youhu.laifu!
 com.whatsapp!
