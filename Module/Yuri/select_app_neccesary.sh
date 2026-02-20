@@ -26,7 +26,6 @@ com.google.android.safetycore!
 com.google.android.apps.nbu.paisa.user!
 com.youhu.laifu!
 com.whatsapp!
-com.studio.duckdetector!
 com.whatsapp.w4b!
 com.reveny.nativecheck!
 icu.nullptr.nativetest!
