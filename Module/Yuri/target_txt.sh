@@ -33,7 +33,6 @@ com.google.android.ims!
 com.google.android.safetycore!
 com.google.android.apps.nbu.paisa.user!
 com.youhu.laifu!
-com.studio.duckdetector!
 com.whatsapp!
 com.whatsapp.w4b!
 com.reveny.nativecheck!
