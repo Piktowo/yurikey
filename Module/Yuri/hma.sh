@@ -2,6 +2,7 @@
 
 # Define important paths and file names
 HMA_DIR="/data/user/0/org.frknkrc44.hma_oss/files"
+HMA_FILE="/data/user/0/org.frknkrc44.hma_oss/files/config.json"
 REMOTE_URL="https://raw.githubusercontent.com/YurikeyDev/yurikey/refs/heads/main/config.json"
 ORG_PATH="$PATH"
 
@@ -16,7 +17,10 @@ download() {
 }
 
 mkdir -p "$HMA_DIR"
-download "$REMOTE_URL" > "$HMA_DIR" || log_message "Error: HMA-oss configs download failed, please download and add it manually!"
+download "$REMOTE_URL" > "$HMA_FILE" || echo "Error: HMA-oss configs download failed, please download and add it manually!"
+if [ ! -f "HMA_FILE" ]; then
+  return 0
+fi
 
-chmod 777 /data/user/0/org.frknkrc44.hma_oss/files/config.json
-chown u0_a0:u0_a0 /data/user/0/org.frknkrc44.hma_oss/files/config.json
+chmod 777 "$HMA_FILE"
+chown u0_a0:u0_a0 "$HMA_FILE"
