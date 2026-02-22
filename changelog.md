@@ -1,18 +1,14 @@
-***✨ v2.41– Version Changes:***
+***✨ v2.5 – Version Changes:***
 
-→ Fix error crash when press action Yurikey Manager on method root Magisk
+→ Remove Set Up Custom Keybox
 
-→ Improve the ability of target.txt to be hidden from Duck Detector. 
-
-→ Stop using remote script because fateh7 like to bark very much
+→ Use Termux to get files on Internet without depend on busybox module
 
 ***📌 Other Changes:***
 
-→ Chore: normalize line endings to LF
-
-→ Fix script customize.sh can not get keybox.xml
+→ Fix some function are not propely translated
 
 → Various performance improvement
 
-→ [All changes](https://github.com/YurikeyDev/yurikey/compare/v2.40...v2.41).
+→ [All changes](https://github.com/YurikeyDev/yurikey/compare/v2.41...v2.5).
 
