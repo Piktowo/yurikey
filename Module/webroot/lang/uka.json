@@ -18,14 +18,14 @@
   "menu_title": "ГОЛОВНЕ МЕНЮ",
   "menu_force_clear": "Примусово зупинити та очистити дані Play Store",
   "menu_keybox": "Налаштувати Yuri Keybox",
-  "menu_import_keybox": "",
+  "menu_import_keybox": "Налаштуйте власний Keybox",
   "menu_target": "Налаштувати Target.txt",
   "menu_necessary": "Встановити потрібний додаток",
   "menu_patch": "Налаштувати патч безпеки",
 
   "advance_menu_title": "Розширене меню",
-  "advance_clear_all_detection_traces": "",
-  "advance_set_hma-oss_configs": "",
+  "advance_clear_all_detection_traces": "Очистити всі сліди виявлення",
+  "advance_set_hma-oss_configs": "Встановити конфігурації HMA-oss",
   "advance_fix_detect_lsposed": "Виправити виявлення lsposed (2)",
   "advance_fix_detect_pif": "Виправити виявлення PIF (1)",
   "advance_fix_detect_recovery_file": "Виправити виявлення файлу відновлення",
@@ -60,3 +60,4 @@
   "home_disconnected": "Відключено"
 
 }
+
