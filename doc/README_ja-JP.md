@@ -60,9 +60,9 @@ https://t.me/yurikernel
 [Yuri](https://github.com/Yurii0307)  
 [yourbestregard](https://github.com/yourbestregard)  
 [cvnertnc](https://github.com/cvnertnc)  
-[ZG089](https://github.com/ZG089)
-[Tam](https://github.com/Tam97123)
-[Munch](https://github.com/SudoNothing404)  
+[ZG089](https://github.com/ZG089)  
+[Tam](https://github.com/Tam97123)  
+[Munch](https://github.com/SudoNothing404)  s
 [Wes](https://github.com/ihatenodejs)  
 [Khx](https://github.com/dpejoh)  
 
