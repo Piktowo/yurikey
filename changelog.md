@@ -10,5 +10,5 @@
 
 → Various performance improvement
 
-→ [All changes](https://github.com/YurikeyDev/yurikey/compare/v2.41...v2.5).
+→ [All changes](https://github.com/YurikeyDev/yurikey/compare/v2.41...main).
 
