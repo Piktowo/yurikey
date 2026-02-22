@@ -18,14 +18,14 @@
   "menu_title": "MENU UTAMA",
   "menu_force_clear": "Paksa Berhenti & Bersihkan Data Play Store",
   "menu_keybox": "Atur Yuri Keybox",
-  "menu_import_keybox": "",
+  "menu_import_keybox": "Atur kustom Keybox",
   "menu_target": "Atur target.txt",
   "menu_necessary": "Atur aplikasi yang diperlukan",
   "menu_patch": "Terapkan Patch Keamanan",
 
   "advance_menu_title": "Menu Lanjutan",
-  "advance_clear_all_detection_traces": "",
-  "advance_set_hma-oss_configs": "",
+  "advance_clear_all_detection_traces": "Hapus semua jejak deteksi",
+  "advance_set_hma-oss_configs": "Atur konfigurasi HMA-oss",
   "advance_fix_detect_lsposed": "Perbaiki Deteksi lsposed (2)",
   "advance_fix_detect_pif": "Perbaiki Deteksi PIF (1)",
   "advance_fix_detect_recovery_file": "Perbaiki Deteksi File Recovery",
@@ -59,4 +59,5 @@
   "home_connected": "Terhubung",
   "home_disconnected": "Terputus"
 }
+
 
