@@ -3,12 +3,14 @@
 # Define important paths and file names
 TRICKY_DIR="/data/adb/tricky_store"
 REMOTE_URL="https://raw.githubusercontent.com/Yurii0307/yurikey/main/key"
+REMOTE_FILE="$TRICKY_DIR/key"
+BREMOTE_FILE="$TRICKY_DIR/keybox"
 TARGET_FILE="$TRICKY_DIR/keybox.xml"
 BACKUP_FILE="$TRICKY_DIR/keybox.xml.bak"
-REMOTE_FILE="$TRICKY_DIR/key"
 DEPENDENCY_MODULE="/data/adb/modules/tricky_store"
 DEPENDENCY_MODULE_UPDATE="/data/adb/modules_update/tricky_store"
 BBIN="/data/adb/Yurikey/bin"
+ORG_PATH="$PATH"
 
 # Show UI banner
 ui_print ""
@@ -43,14 +45,21 @@ download() {
     else
         busybox wget -T 10 --no-check-certificate -qO- "$1"
     fi
-    PATH="$PATH"
+    PATH="$ORG_PATH"
 }
 
 # Function to download the remote keybox
 get_keybox() {
-    ping -c 1 -w 5 raw.githubusercontent.com &>/dev/null || ui_print "Error: Unable to connect to raw.githubusercontent.com, please download and add keybox manually!"
     download "$REMOTE_URL" > "$REMOTE_FILE" || ui_print "Error: Keybox download failed, please download and add it manually!"
-    base64 -d "$REMOTE_FILE" > "$TARGET_FILE"
+
+    if ! base64 -d "$REMOTE_FILE" > "$BREMOTE_FILE" 2>/dev/null; then
+        ui_print "- Error: Base64 decode failed!"
+        rm -f "$REMOTE_FILE"
+        return 1
+    fi
+
+    rm -f "$REMOTE_FILE"
+    return 0
 }
 
 # Function to update the keybox file
@@ -64,19 +73,20 @@ update_keybox() {
   # Check if keybox already exists
   if [ -f "$TARGET_FILE" ]; then
     # If the new one is identical, skip update
-    if cmp -s "$TARGET_FILE" "$REMOTE_FILE"; then
+    if cmp -s "$TARGET_FILE" "$BREMOTE_FILE"; then
       ui_print "- Existing Yuri Keybox found. No changes made."
-      rm -f "$REMOTE_FILE"
+      rm -f "$BREMOTE_FILE"
       return
     else
       # If the file differs, back up the old one
       ui_print "- Existing keybox is not by Yuri."
       ui_print "- Creating a backup..."
       mv "$TARGET_FILE" "$BACKUP_FILE"
-      mv "$REMOTE_FILE" "$TARGET_FILE"
+      mv "$BREMOTE_FILE" "$TARGET_FILE"
     fi
   else
     ui_print "- No keybox found. Creating a new one."
+    mv "$BREMOTE_FILE" "$TARGET_FILE"
   fi
 }
 # Start main logic
