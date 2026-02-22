@@ -6,6 +6,7 @@ REMOTE_URL="https://raw.githubusercontent.com/Yurii0307/yurikey/main/key"
 REMOTE_FILE="$TRICKY_DIR/keybox"
 TARGET_FILE="$TRICKY_DIR/keybox.xml"
 BACKUP_FILE="$TRICKY_DIR/keybox.xml.bak"
+DECODE_FILE="$TRICKY_DIR/keybox_decode"
 DEPENDENCY_MODULE="/data/adb/modules/tricky_store"
 DEPENDENCY_MODULE_UPDATE="/data/adb/modules_update/tricky_store"
 BBIN="/data/adb/Yurikey/bin"
@@ -49,7 +50,7 @@ download() {
 get_keybox() {
     download "$REMOTE_URL" > "$REMOTE_FILE" || ui_print "Error: Keybox download failed, please add keybox manually!"
 
-    if ! base64 -d "$REMOTE_FILE" > "$REMOTE_FILE" 2>/dev/null; then
+    if ! base64 -d "$REMOTE_FILE" > "$DECODE_FILE" 2>/dev/null; then
         ui_print "- Error: Base64 decode failed!"
         return 1
     fi
@@ -67,7 +68,7 @@ update_keybox() {
   # Check if keybox already exists
   if [ -f "$TARGET_FILE" ]; then
     # If the new one is identical, skip update
-    if cmp -s "$TARGET_FILE" "$REMOTE_FILE"; then
+    if cmp -s "$TARGET_FILE" "$DECODE_FILE"; then
       ui_print "- Existing Yuri Keybox found. No changes made."
       rm -f "$REMOTE_FILE"
       return
@@ -76,11 +77,12 @@ update_keybox() {
       ui_print "- Existing keybox is not by Yuri."
       ui_print "- Creating a backup keybox..."
       mv "$TARGET_FILE" "$BACKUP_FILE"
-      mv "$REMOTE_FILE" "$TARGET_FILE"
+      mv "$DECODE_FILE" "$TARGET_FILE"
     fi
   else
     ui_print "- No keybox found! Creating a new one..."
-    mv "$REMOTE_FILE" "$TARGET_FILE"
+    mv "$DECODE_FILE" "$TARGET_FILE"
+    rm -f "$REMOTE_FILE"
   fi
 }
 # Start main logic
