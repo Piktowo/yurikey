@@ -3,26 +3,21 @@
 # Define important paths and file names
 TRICKY_DIR="/data/adb/tricky_store"
 REMOTE_URL="https://raw.githubusercontent.com/Yurii0307/yurikey/main/key"
+REMOTE_FILE="$TRICKY_DIR/key"
+BREMOTE_FILE="$TRICKY_DIR/keybox"
 TARGET_FILE="$TRICKY_DIR/keybox.xml"
 BACKUP_FILE="$TRICKY_DIR/keybox.xml.bak"
-REMOTE_FILE="$TRICKY_DIR/key"
 DEPENDENCY_MODULE="/data/adb/modules/tricky_store"
 DEPENDENCY_MODULE_UPDATE="/data/adb/modules_update/tricky_store"
+BBIN="/data/adb/Yurikey/bin"
+ORG_PATH="$PATH"
 
-# Detailed log
-log_message() {
-    echo "$(date +'%Y-%m-%d %H:%M:%S') [YURI_KEYBOX] $1"
-}
-
-log_message "Start"
-log_message "Writing"
-
-# Check if Tricky Store module is installed ( required dependency )
+# Check if Tricky Store module is installed (required dependency)
 if [ -d "$DEPENDENCY_MODULE_UPDATE" ] || [ -d "$DEPENDENCY_MODULE" ]; then
-  log_message "Tricky Store installed"
+  ui_print "- Tricky Store installed"
 else
-  log_message "Error: Tricky Store module file not found!"
-  log_message "Please install Tricky Store before using Yuri Keybox."
+  ui_print "- Error: Tricky Store module file not found!"
+  ui_print "- Please install Tricky Store before using Yuri Keybox."
   return 0
 fi
 
@@ -33,27 +28,29 @@ download() {
     else
         busybox wget -T 10 --no-check-certificate -qO- "$1"
     fi
-    PATH="$PATH"
+    PATH="$ORG_PATH"
 }
 
 # Function to download the remote keybox
 get_keybox() {
-    ping -c 1 -w 5 raw.githubusercontent.com &>/dev/null || log_message "Error: Unable to connect to raw.githubusercontent.com, please download and add keybox manually!"
-    download "$REMOTE_URL" > "$REMOTE_FILE" || log_message "Error: Keybox download failed, please download and add it manually!"
-    base64 -d "$REMOTE_FILE" > "$TARGET_FILE"
-}
+    download "$REMOTE_URL" > "$REMOTE_FILE" || ui_print "Error: Keybox download failed, please download and add it manually!"
 
-# Function to backup the keybox file
-if [ -f "$TARGET_FILE" ]; then
-  mv "$TARGET_FILE" "$BACKUP_FILE"
-fi
+    if ! base64 -d "$REMOTE_FILE" > "$BREMOTE_FILE" 2>/dev/null; then
+        ui_print "- Error: Base64 decode failed!"
+        rm -f "$REMOTE_FILE"
+        return 1
+    fi
+
+    rm -f "$REMOTE_FILE"
+    return 0
+}
 
 # Function to update the keybox file
 update_keybox() {
+  ui_print "- Fetching remote keybox..."
   if ! get_keybox; then
-    mv "$BACKUP_FILE" "$TARGET_FILE"
-    log_message "Error: Update keybox failed!"
-    return 0
+    ui_print "- Failed to fetch keybox!"
+    return
   fi
 }
 
