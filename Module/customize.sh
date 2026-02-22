@@ -4,8 +4,8 @@
 TRICKY_DIR="/data/adb/tricky_store"
 REMOTE_URL="https://raw.githubusercontent.com/Yurii0307/yurikey/main/key"
 TARGET_FILE="$TRICKY_DIR/keybox.xml"
-REMOTE_FILE="$TRICKY_DIR/keybox"
 BACKUP_FILE="$TRICKY_DIR/keybox.xml.bak"
+REMOTE_FILE="$TRICKY_DIR/key"
 DEPENDENCY_MODULE="/data/adb/modules/tricky_store"
 DEPENDENCY_MODULE_UPDATE="/data/adb/modules_update/tricky_store"
 BBIN="/data/adb/Yurikey/bin"
@@ -16,14 +16,6 @@ ui_print "*********************************"
 ui_print "*****Yuri Keybox Installer*******"
 ui_print "*********************************"
 ui_print ""
-
-# Check code
-if ! command -v curl >/dev/null 2>&1; then
-  ui_print "- Cannot work without missing command."
-  ui_print "- Tip: You can install a working BusyBox with network tools from:"
-  ui_print "- https://mmrl.dev/repository/grdoglgmr/busybox-ndk"
-  exit 0
-fi
 
 # Remove old module if legacy path exists (lowercase 'yurikey')
 if [ -d "/data/adb/modules/yurikey" ]; then
@@ -44,19 +36,27 @@ if [ -d "$BBIN" ]; then
   rm -rf $BBIN
 fi
 
-# Function to download the remote keybox
-fetch_remote_keybox() {
-    curl -fsSL "$REMOTE_URL" | base64 -d > "$REMOTE_FILE"
-    if [ ! -f "$REMOTE_FILE" ]; then
-      ui_print "ERROR: Remote script failed or no vaild keybox found. Aborting."
-      return 1
+download() {
+    PATH=/data/adb/magisk:/data/data/com.termux/files/usr/bin:$PATH
+    if command -v curl >/dev/null 2>&1; then
+        curl --connect-timeout 10 -Ls "$1"
+    else
+        busybox wget -T 10 --no-check-certificate -qO- "$1"
     fi
+    PATH="$PATH"
+}
+
+# Function to download the remote keybox
+get_keybox() {
+    ping -c 1 -w 5 raw.githubusercontent.com &>/dev/null || ui_print "Error: Unable to connect to raw.githubusercontent.com, please download and add keybox manually!"
+    download "$REMOTE_URL" > "$REMOTE_FILE" || ui_print "Error: Keybox download failed, please download and add it manually!"
+    base64 -d "$REMOTE_FILE" > "$TARGET_FILE"
 }
 
 # Function to update the keybox file
 update_keybox() {
   ui_print "- Fetching remote keybox..."
-  if ! fetch_remote_keybox; then
+  if ! get_keybox; then
     ui_print "- Failed to fetch keybox!"
     return
   fi
