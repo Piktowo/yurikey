@@ -54,9 +54,10 @@
 
   "status_online": "Trạng thái: Trực tuyến",
   "status_offline": "Trạng thái: Ngoại tuyến",
-  "home_refresh_failed": "Làm mới thông tin thất bại.",
+  "home_refresh_failed": "Làm mới thông tin thất bại!",
   "home_no_internet": "Không có kết nối internet.",
   "home_connected": "Đã kết nối",
   "home_disconnected": "Mất kết nối"
 
 }
+
