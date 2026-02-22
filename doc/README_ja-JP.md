@@ -62,7 +62,7 @@ https://t.me/yurikernel
 [cvnertnc](https://github.com/cvnertnc)  
 [ZG089](https://github.com/ZG089)  
 [Tam](https://github.com/Tam97123)  
-[Munch](https://github.com/SudoNothing404)  s
+[Munch](https://github.com/SudoNothing404)  
 [Wes](https://github.com/ihatenodejs)  
 [Khx](https://github.com/dpejoh)  
 
