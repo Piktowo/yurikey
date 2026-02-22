@@ -6,7 +6,7 @@
 
 ***📌 Other Changes:***
 
-→ Fix some function are not propely translated
+→ Fix some function which are not properly translated
 
 → Various performance improvement
 
