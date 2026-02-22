@@ -12,7 +12,7 @@ BBIN="/data/adb/Yurikey/bin"
 ORG_PATH="$PATH"
 
 log_message() {
-    echo "$(date +%Y-%m-%d\ %H:%M:%S) [SET_TARGET] $1"
+    echo "$(date +%Y-%m-%d\ %H:%M:%S) [YURI_KEYBOX] $1"
 }
 log_message "Start"
 
