@@ -5,6 +5,7 @@ TRICKY_DIR="/data/adb/tricky_store"
 REMOTE_URL="https://raw.githubusercontent.com/Yurii0307/yurikey/main/key"
 TARGET_FILE="$TRICKY_DIR/keybox.xml"
 BACKUP_FILE="$TRICKY_DIR/keybox.xml.bak"
+REMOTE_FILE="$TRICKY_DIR/key"
 DEPENDENCY_MODULE="/data/adb/modules/tricky_store"
 DEPENDENCY_MODULE_UPDATE="/data/adb/modules_update/tricky_store"
 
@@ -38,8 +39,8 @@ download() {
 # Function to download the remote keybox
 get_keybox() {
     ping -c 1 -w 5 raw.githubusercontent.com &>/dev/null || log_message "Error: Unable to connect to raw.githubusercontent.com, please download and add keybox manually!"
-    download "$REMOTE_URL" > "$TRICKY_DIR" || log_message "Error: Keybox download failed, please download and add it manually!"
-    base64 -d key > "$TARGET_FILE"
+    download "$REMOTE_URL" > "$REMOTE_FILE" || log_message "Error: Keybox download failed, please download and add it manually!"
+    base64 -d "$REMOTE_FILE" > "$TARGET_FILE"
 }
 
 # Function to backup the keybox file
