@@ -3,8 +3,7 @@
 # Define important paths and file names
 TRICKY_DIR="/data/adb/tricky_store"
 REMOTE_URL="https://raw.githubusercontent.com/Yurii0307/yurikey/main/key"
-REMOTE_FILE="$TRICKY_DIR/key"
-BREMOTE_FILE="$TRICKY_DIR/keybox"
+REMOTE_FILE="$TRICKY_DIR/keybox"
 TARGET_FILE="$TRICKY_DIR/keybox.xml"
 BACKUP_FILE="$TRICKY_DIR/keybox.xml.bak"
 DEPENDENCY_MODULE="/data/adb/modules/tricky_store"
@@ -25,9 +24,7 @@ if [ -d "/data/adb/modules/yurikey" ]; then
 fi
 
 # Check if Tricky Store module is installed (required dependency)
-if [ -d "$DEPENDENCY_MODULE_UPDATE" ] || [ -d "$DEPENDENCY_MODULE" ]; then
-  ui_print "- Tricky Store installed"
-else
+if [ ! -d "$DEPENDENCY_MODULE_UPDATE" ] && [ ! -d "$DEPENDENCY_MODULE" ]; then
   ui_print "- Error: Tricky Store module file not found!"
   ui_print "- Please install Tricky Store before using Yuri Keybox."
   return 0
@@ -50,15 +47,12 @@ download() {
 
 # Function to download the remote keybox
 get_keybox() {
-    download "$REMOTE_URL" > "$REMOTE_FILE" || ui_print "Error: Keybox download failed, please download and add it manually!"
+    download "$REMOTE_URL" > "$REMOTE_FILE" || ui_print "Error: Keybox download failed, please add keybox manually!"
 
-    if ! base64 -d "$REMOTE_FILE" > "$BREMOTE_FILE" 2>/dev/null; then
+    if ! base64 -d "$REMOTE_FILE" > "$REMOTE_FILE" 2>/dev/null; then
         ui_print "- Error: Base64 decode failed!"
-        rm -f "$REMOTE_FILE"
         return 1
     fi
-
-    rm -f "$REMOTE_FILE"
     return 0
 }
 
@@ -73,20 +67,20 @@ update_keybox() {
   # Check if keybox already exists
   if [ -f "$TARGET_FILE" ]; then
     # If the new one is identical, skip update
-    if cmp -s "$TARGET_FILE" "$BREMOTE_FILE"; then
+    if cmp -s "$TARGET_FILE" "$REMOTE_FILE"; then
       ui_print "- Existing Yuri Keybox found. No changes made."
-      rm -f "$BREMOTE_FILE"
+      rm -f "$REMOTE_FILE"
       return
     else
       # If the file differs, back up the old one
       ui_print "- Existing keybox is not by Yuri."
-      ui_print "- Creating a backup..."
+      ui_print "- Creating a backup keybox..."
       mv "$TARGET_FILE" "$BACKUP_FILE"
-      mv "$BREMOTE_FILE" "$TARGET_FILE"
+      mv "$REMOTE_FILE" "$TARGET_FILE"
     fi
   else
-    ui_print "- No keybox found. Creating a new one."
-    mv "$BREMOTE_FILE" "$TARGET_FILE"
+    ui_print "- No keybox found! Creating a new one..."
+    mv "$REMOTE_FILE" "$TARGET_FILE"
   fi
 }
 # Start main logic
