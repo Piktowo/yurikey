@@ -54,9 +54,10 @@
 
   "status_online": "Status: Online",
   "status_offline": "Status: Offline",
-  "home_refresh_failed": "Failed to refresh info.",
+  "home_refresh_failed": "Failed to refresh info!",
   "home_no_internet": "No internet connection.",
   "home_connected": "Connected",
   "home_disconnected": "Disconnected"
 
 }
+
