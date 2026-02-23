@@ -1,18 +1,36 @@
 name: Build Module
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
-      - name: Upload release artifact
-        uses: actions/upload-artifact@v4
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version
+        id: version
+        run: |
+          VERSION=$(grep -m 1 -oP 'v[0-9]+(\.[0-9]+)+' changelog.md)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Zip Module folder
+        run: |
+          zip -r module-${{ steps.version.outputs.version }}.zip Module
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: YuriKey_${{ env.BUILD_ID }}
-          path: |
-            ${{ github.workspace }}/Module/*
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          body_path: changelog.md
+          files: Yuriikey-${{ steps.version.outputs.version }}.signed.zip
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
