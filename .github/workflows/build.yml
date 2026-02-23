@@ -25,8 +25,9 @@ jobs:
 
       - name: Zip Module folder
         run: |
-          zip -r Yurikey-${{ steps.version.outputs.version }}.signed.zip Module
-
+          cd Module
+          zip -r ../Yurikey-${{ steps.version.outputs.version }}.signed.zip .
+          
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
@@ -36,3 +37,4 @@ jobs:
           files: Yurikey-${{ steps.version.outputs.version }}.signed.zip
         env:
           GITHUB_TOKEN: ${{ github.token }}
+ .
