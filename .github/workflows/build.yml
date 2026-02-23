@@ -37,4 +37,3 @@ jobs:
           files: Yurikey-${{ steps.version.outputs.version }}.signed.zip
         env:
           GITHUB_TOKEN: ${{ github.token }}
- .
