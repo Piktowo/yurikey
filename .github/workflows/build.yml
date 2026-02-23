@@ -23,13 +23,13 @@ jobs:
 
       - name: Zip Module folder
         run: |
-          zip -r module-${{ steps.version.outputs.version }}.zip Module
+          zip -r Yurikey-${{ steps.version.outputs.version }}.signed.zip Module
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.version }}
-          name: Release ${{ steps.version.outputs.version }}
+          name: Yurikey Manager ${{ steps.version.outputs.version }}
           body_path: changelog.md
           files: Yuriikey-${{ steps.version.outputs.version }}.signed.zip
         env:
